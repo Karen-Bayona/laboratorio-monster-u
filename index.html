@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admisiones | Monsters University</title>
+    <style>
+         :root {
+            --mu-blue: #004a7c;
+            --mu-green: #89c402;
+            --mu-light-bg: #f4f7f9;
+            --white: #ffffff;
+            --text-main: #333;
+            --text-muted: #555;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--white);
+            color: var(--text-main);
+            scroll-behavior: smooth;
+        }
+        
+        nav {
+            background-color: var(--white);
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--mu-blue);
+        }
+        
+        .nav-brand img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav-brand span {
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li a {
+            color: var(--mu-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--mu-green);
+        }
+        
+        .main-wrapper {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+        
+        .left-side {
+            flex: 1;
+            padding: 60px 6%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .left-side h1 {
+            font-size: 3.5rem;
+            color: var(--mu-blue);
+            margin-bottom: 20px;
+            line-height: 1.1;
+            font-weight: 800;
+        }
+        
+        .left-side p.hero-text {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 35px;
+            border-left: 6px solid var(--mu-green);
+            padding-left: 25px;
+        }
+        
+        .university-img {
+            width: 100%;
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1541339907198-e08756defe03?auto=format&fit=crop&w=1000&q=80') center/cover;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        .right-side {
+            flex: 0.85;
+            background-color: var(--mu-light-bg);
+            padding: 60px 4%;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-container {
+            background: var(--white);
+            padding: 45px;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            width: 100%;
+        }
+        
+        .form-container h2 {
+            color: var(--mu-blue);
+            margin-top: 0;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .full-row {
+            grid-column: span 2;
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--mu-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        input,
+        select {
+            padding: 14px;
+            border: 2px solid #edf2f7;
+            border-radius: 12px;
+            font-size: 15px;
+            background-color: #f8fafc;
+            transition: all 0.3s;
+        }
+        
+        input:focus,
+        select:focus {
+            border-color: var(--mu-blue);
+            background-color: #fff;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0, 74, 124, 0.1);
+        }
+        
+        button {
+            width: 100%;
+            padding: 18px;
+            background-color: var(--mu-blue);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        button:hover {
+            background-color: var(--mu-green);
+            color: var(--mu-blue);
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(137, 196, 2, 0.2);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 1100px) {
+            .main-wrapper {
+                flex-direction: column;
+            }
+            .left-side {
+                padding: 40px 5%;
+                text-align: center;
+            }
+            .left-side p.hero-text {
+                border-left: none;
+                border-top: 5px solid var(--mu-green);
+                padding: 20px 0 0 0;
+            }
+            .right-side {
+                padding: 40px 5%;
+            }
+        }
+        
+        .character-img-container {
+            width: 100%;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .character-img-container img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--white);
+            transition: transform 0.3s ease;
+        }
+        
+        .character-img-container img:hover {
+            transform: scale(1.02);
+        }
+        
+        footer {
+            background-color: #002b49;
+            color: white;
+            padding: 20px 5%;
+            border-top: 4px solid var(--mu-green);
+        }
+        
+        .footer-horizontal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        
+        .footer-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .brand img {
+            height: 40px;
+            background: white;
+            padding: 3px;
+            border-radius: 4px;
+        }
+        
+        .brand span {
+            font-weight: bold;
+            color: var(--mu-green);
+        }
+        
+        .contact-info span {
+            color: #cbd5e0;
+        }
+        
+        .legal-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .legal-links a:hover {
+            color: var(--mu-green);
+        }
+        
+        .contact-info span:not(:last-child)::after,
+        .legal-links a:not(:last-child)::after {
+            content: "|";
+            margin-left: 20px;
+            color: #4a5568;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-horizontal {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            .contact-info span::after,
+            .legal-links a::after {
+                content: "";
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="#" class="nav-brand">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPxj9MHslbczk9yZCAnzIHRqpc9w5TGOBIBg&s" alt="MU Logo">
+            <span>Monsters University</span>
+        </a>
+        <ul>
+            <li><a href="#">Facultades</a></li>
+            <li><a href="#">Investigación</a></li>
+            <li><a href="#">Admisiones</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="left-side">
+            <h1> INICIA TU CAMINO PROFESIONAL EN MU </h1>
+            <h2>Libera el monstruo que llevas dentro.</h2>
+            <p class="hero-text">
+                Únete a la mejor academía del mundo monstruoso. En <strong>MU</strong>, transformamos tu talento natural en una carrera de éxito global. Ya sea que busques asustar, innovar o liderar, tu futuro comienza aquí.
+            </p>
+            <div class="character-img-container">
+                <img src="https://ellethinks.wordpress.com/wp-content/uploads/2020/04/1395333.jpg?w=640" alt="Estudiantes destacados MU">
+            </div>
+
+        </div>
+
+        <div class="right-side">
+            <div class="form-container">
+                <h2>Portal de Inscripción</h2>
+                <form action="#">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Nombres*</label>
+                            <input type="text" placeholder="Karen Marcela" required>
+                        </div>
+                        <div class="field">
+                            <label>Apellidos*</label>
+                            <input type="text" placeholder="Bayona Romero" required>
+                        </div>
+                        <div class="field">
+                            <label>Tipo Documento*</label>
+                            <select required>
+                                <option value="">Seleccione...</option>
+                                <option>Cédula de Ciudadanía</option>
+                                <option>Cédula de Extranjería</option>
+                                <option>Tarjeta de Identidad</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Número de Documento*</label>
+                            <input type="text" placeholder="0000000000" required>
+                        </div>
+                        <div class="field">
+                            <label>Email*</label>
+                            <input type="email" placeholder="sully@mu.edu" required>
+                        </div>
+                        <div class="field">
+                            <label>Celular*</label>
+                            <input type="tel" placeholder="3100000000" required>
+                        </div>
+                        <div class="field">
+                            <label>Nivel Académico*</label>
+                            <select required>
+                                <option value="">Seleccione Nivel...</option>
+                                <option>Pregrado</option>
+                                <option>Especialización</option>
+                                <option>Maestría</option>
+                                <option>Doctorado</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Programa*</label>
+                            <select required>
+                                <option value="">Seleccione Programa...</option>
+                                <option>Ingeniería de Sustos</option>
+                                <option>Gestión de Energía</option>
+                                <option>Diseño de Puertas</option>
+                                <option>Marketing de Humanos</option>
+                                <option>Psicología de los Monstruos</option>
+                                <option>Finanzas entre Monstruos</option>
+                            </select>
+                        </div>
+                        <div class="field full-row">
+                            <label>Periodo de Ingreso*</label>
+                            <select required>
+                                <option value="">Seleccione Semestre...</option>
+                                <option>2026 - I </option>
+                                <option>2026 - II </option>
+                                <option>2027 - I </option>
+                                <option>2027 - II </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit">POSTULARME AHORA</button>
+                    <p style="font-size: 11px; color: #999; text-align: center; margin-top: 20px;">
+                        © 2026 Monsters University. Todos los derechos reservados.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-horizontal">
+            <div class="footer-item brand">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPxj9MHslbczk9yZCAnzIHRqpc9w5TGOBIBg&s" alt="Logo MU">
+                <span>Formando a los asustadores del mañana </span>
+            </div>
+
+            <div class="footer-item contact-info">
+                <span>📍 Av. de los Gritos #101</span>
+                <span>📞 +1 (800) MU-SUSTOS</span>
+                <span>✉️ admisiones@mu.edu</span>
+            </div>
+
+            <div class="footer-item legal-links">
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Datos</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
